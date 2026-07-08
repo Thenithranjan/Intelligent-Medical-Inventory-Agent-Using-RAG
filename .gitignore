@@ -30,7 +30,6 @@ share/python-wheels/
 # Specific directories
 uploads/
 vectorstore/
-data/
 
 # OS generated files
 .DS_Store

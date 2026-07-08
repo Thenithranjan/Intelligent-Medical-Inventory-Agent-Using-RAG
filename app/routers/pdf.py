@@ -70,6 +70,7 @@ async def upload_pdf(file: UploadFile = File(...)):
         ingest_result = ingest_pdf(
             pdf_path=saved_path,
             index_name=index_name,
+            source_filename=safe_name,
         )
 
     

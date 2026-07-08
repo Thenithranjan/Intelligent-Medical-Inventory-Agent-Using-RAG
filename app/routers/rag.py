@@ -31,7 +31,7 @@ async def ingest_document(request: IngestRequest):
             raise HTTPException(status_code=404, detail=f"PDF not found: {request.pdf_path}")
 
     try:
-        result = ingest_pdf(pdf_path, index_name=request.index_name)
+        result = ingest_pdf(pdf_path, index_name=request.index_name, source_filename=pdf_path.name)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

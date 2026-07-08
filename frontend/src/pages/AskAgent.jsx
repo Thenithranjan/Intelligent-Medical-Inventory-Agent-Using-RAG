@@ -8,10 +8,10 @@ import { askAgent } from '../api/client';
 import './AskAgent.css';
 
 const SUGGESTIONS = [
-  'How to store insulin properly?',
-  'What are the side effects of Metformin?',
-  'Recommended dosage for Amoxicillin 500mg',
+  'Give me storage instructions for insulin',
   'Temperature requirements for vaccines',
+  'What is the standard dosage for Amoxicillin',
+  'What are the PRE-OPERATIVE ASSESSMENT steps in the surgery',
 ];
 
 export default function AskAgent() {
