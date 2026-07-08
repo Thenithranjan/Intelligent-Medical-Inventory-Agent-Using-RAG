@@ -1,0 +1,99 @@
+/* ============================================================
+   Upload PDF Page
+   ============================================================ */
+.upload-page-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.upload-main {
+  animation: fadeInUp 0.4s var(--ease-smooth) both;
+}
+
+/* --- Info sidebar --- */
+.upload-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: fadeInUp 0.5s var(--ease-smooth) 0.15s both;
+}
+
+.upload-info-card {
+  padding: var(--space-6);
+}
+
+.upload-info-card h4 {
+  margin-bottom: var(--space-5);
+  font-size: 1rem;
+}
+
+/* --- Steps --- */
+.upload-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.upload-step {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.upload-step-num {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.25);
+}
+
+.upload-step-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.upload-step-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* --- Features --- */
+.upload-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.upload-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.upload-feature svg {
+  color: var(--primary-400);
+  flex-shrink: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .upload-page-layout {
+    grid-template-columns: 1fr;
+  }
+}

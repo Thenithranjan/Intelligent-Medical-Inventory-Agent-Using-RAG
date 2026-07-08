@@ -1,0 +1,102 @@
+/* ============================================================
+   Stats Card
+   ============================================================ */
+.stats-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: all var(--duration-normal) var(--ease-smooth);
+  animation: fadeInUp 0.5s var(--ease-smooth) both;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stats-card:hover::after {
+  opacity: 1;
+}
+
+.stats-card-purple::after { background: linear-gradient(135deg, rgba(108, 92, 231, 0.03), rgba(108, 92, 231, 0.08)); }
+.stats-card-teal::after   { background: linear-gradient(135deg, rgba(0, 206, 201, 0.03), rgba(0, 206, 201, 0.08)); }
+.stats-card-orange::after { background: linear-gradient(135deg, rgba(245, 158, 11, 0.03), rgba(245, 158, 11, 0.08)); }
+.stats-card-green::after  { background: linear-gradient(135deg, rgba(16, 185, 129, 0.03), rgba(16, 185, 129, 0.08)); }
+.stats-card-blue::after   { background: linear-gradient(135deg, rgba(59, 130, 246, 0.03), rgba(59, 130, 246, 0.08)); }
+
+/* --- Header row --- */
+.stats-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --- Icon --- */
+.stats-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: #fff;
+}
+
+.stats-icon-purple { background: linear-gradient(135deg, var(--primary-400), var(--primary-600)); box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); }
+.stats-icon-teal   { background: linear-gradient(135deg, var(--accent-300), var(--accent-500)); box-shadow: 0 4px 12px rgba(0, 206, 201, 0.3); }
+.stats-icon-orange { background: linear-gradient(135deg, var(--warning-400), var(--warning-600)); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+.stats-icon-green  { background: linear-gradient(135deg, var(--success-400), var(--success-600)); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+.stats-icon-blue   { background: linear-gradient(135deg, var(--info-400), var(--info-500)); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+/* --- Value --- */
+.stats-card-value {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-top: var(--space-2);
+}
+
+/* --- Label --- */
+.stats-card-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* --- Trend --- */
+.stats-card-trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.trend-up {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success-600);
+}
+.trend-down {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger-600);
+}
+.trend-neutral {
+  background: var(--bg-hover);
+  color: var(--text-muted);
+}
