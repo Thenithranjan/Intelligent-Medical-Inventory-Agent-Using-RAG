@@ -148,7 +148,7 @@ def search_faiss_index(
     query_embedding: list[float],
     index: faiss.Index,
     chunks: list[dict],
-    top_k: int = 3,
+    top_k: int = 5,
 ) -> list[dict]:
     if index.ntotal == 0:
         return []
@@ -184,7 +184,7 @@ def search_faiss_index(
 def search_similar_chunks(
     question: str,
     index_name: str = "default",
-    top_k: int = 3,
+    top_k: int = 5,
 ) -> list[dict]:
     if not question or not question.strip():
         logger.warning("[search_similar_chunks] empty question, returning []")
@@ -207,7 +207,7 @@ def search_similar_chunks(
 def search_similar_chunks_with_error(
     question: str,
     index_name: str = "default",
-    top_k: int = 3,
+    top_k: int = 5,
 ) -> tuple[list[dict], str | None]:
     """
     Same as search_similar_chunks(), but also returns an error string when retrieval fails.

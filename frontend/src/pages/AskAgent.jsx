@@ -5,10 +5,11 @@ import Header from '../components/Header';
 import ChatBubble from '../components/ChatBubble';
 import Button from '../components/Button';
 import { askAgent } from '../api/client';
+import { useToast } from '../context/ToastContext';
 import './AskAgent.css';
 
 const SUGGESTIONS = [
-  'Give me storage instructions for insulin',
+  'what are the storage instructions to store the insulin?',
   'Temperature requirements for vaccines',
   'What is the standard dosage for Amoxicillin',
   'What are the PRE-OPERATIVE ASSESSMENT steps in the surgery',
@@ -16,9 +17,11 @@ const SUGGESTIONS = [
 
 export default function AskAgent() {
   const location = useLocation();
+  const toast = useToast();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState('');
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -43,9 +46,15 @@ export default function AskAgent() {
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setLoading(true);
+    setLoadingStatus('Searching knowledge base...');
 
     // Show typing indicator
     setMessages((prev) => [...prev, { role: 'agent', isTyping: true }]);
+
+    // Transition status to Groq generation after 1000ms
+    const statusTimer = setTimeout(() => {
+      setLoadingStatus('Generating AI response...');
+    }, 1000);
 
     try {
       const res = await askAgent(q);
@@ -61,18 +70,27 @@ export default function AskAgent() {
         ];
       });
     } catch (err) {
+      const detailMsg = err?.response?.data?.detail;
+      if (detailMsg === "No relevant information found in uploaded documents.") {
+        toast.error("No relevant answer found");
+      } else {
+        toast.error(detailMsg || "Unable to generate response from Groq.");
+      }
+
       setMessages((prev) => {
         const filtered = prev.filter((m) => !m.isTyping);
         return [
           ...filtered,
           {
             role: 'agent',
-            text: err?.response?.data?.detail || 'Sorry, something went wrong. Make sure the backend is running and a PDF has been ingested.',
+            text: detailMsg || 'Sorry, something went wrong. Make sure the backend is running and a PDF has been ingested.',
           },
         ];
       });
     } finally {
+      clearTimeout(statusTimer);
       setLoading(false);
+      setLoadingStatus('');
     }
   };
 
@@ -112,6 +130,7 @@ export default function AskAgent() {
                       key={s}
                       className="chat-suggestion-chip"
                       onClick={() => handleSend(s)}
+                      disabled={loading}
                     >
                       {s}
                     </button>
@@ -121,7 +140,11 @@ export default function AskAgent() {
             ) : (
               <>
                 {messages.map((msg, i) => (
-                  <ChatBubble key={i} {...msg} />
+                  <ChatBubble
+                    key={i}
+                    {...msg}
+                    typingText={msg.isTyping ? loadingStatus : undefined}
+                  />
                 ))}
                 <div ref={chatEndRef} />
               </>
@@ -149,6 +172,7 @@ export default function AskAgent() {
                     iconOnly
                     icon={<Eraser size={16} />}
                     onClick={clearChat}
+                    disabled={loading}
                     title="Clear chat"
                   />
                 )}

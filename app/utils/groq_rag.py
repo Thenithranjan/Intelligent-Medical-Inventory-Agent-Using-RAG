@@ -78,7 +78,7 @@ def ask_groq(
 def answer_with_rag(
     question: str,
     index_name: str = "default",
-    top_k: int = 3,
+    top_k: int = 5,
     model_name: str = DEFAULT_MODEL,
 ) -> dict[str, str | list[dict]]:
     retrieved = search_similar_chunks(question, index_name=index_name, top_k=top_k)

@@ -11,6 +11,7 @@ import {
 import Header from '../components/Header';
 import Button from '../components/Button';
 import { checkHealth } from '../api/client';
+import { API } from '../config/api';
 import './KnowledgeBase.css';
 
 export default function KnowledgeBase() {
@@ -54,7 +55,7 @@ export default function KnowledgeBase() {
               </span>
             </div>
             <h4>Backend Server</h4>
-            <p>FastAPI + Uvicorn · localhost:8000</p>
+            <p>FastAPI + Uvicorn · {API ? new URL(API).host : ''}</p>
           </div>
 
           <div className="kb-status-card glass-card-solid">

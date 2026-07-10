@@ -15,7 +15,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=[
+        "http://localhost:5173"
+        # REPLACE_WITH_NETLIFY_URL: Add your Netlify frontend URL here (e.g. "https://your-app.netlify.app")
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,6 +28,13 @@ app.include_router(pdf.router)
 app.include_router(rag.router)
 
 
+@app.get("/")
+async def root():
+    return {
+        "message": "Intelligent Medical Inventory Agent API is running successfully"
+    }
+
+
 @app.get("/health")
 async def health():
-    return {"status": "ok"}
+    return {"status": "healthy"}

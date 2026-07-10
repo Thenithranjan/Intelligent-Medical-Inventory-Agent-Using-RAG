@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from 'react';
 import { Upload, FileText, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import Button from './Button';
+import { useToast } from '../context/ToastContext';
 import './FileUploader.css';
 
 /**
@@ -8,6 +9,7 @@ import './FileUploader.css';
  * @param {(file: File) => Promise<any>} onUpload — async upload handler
  */
 export default function FileUploader({ onUpload }) {
+  const toast = useToast();
   const inputRef = useRef(null);
   const [dragOver, setDragOver] = useState(false);
   const [file, setFile] = useState(null);
@@ -29,11 +31,13 @@ export default function FileUploader({ onUpload }) {
       if (!f || !f.name.toLowerCase().endsWith('.pdf')) {
         setError('Please select a PDF file.');
         setStatus('error');
+        toast.error('Please select a PDF file.');
         return;
       }
       if (f.size > 10 * 1024 * 1024) {
         setError('File exceeds the 10 MB limit.');
         setStatus('error');
+        toast.error('File exceeds the 10 MB limit.');
         return;
       }
 
@@ -49,12 +53,16 @@ export default function FileUploader({ onUpload }) {
         });
         setResult(res);
         setStatus('success');
+        toast.success('PDF uploaded successfully');
+        toast.success('Knowledge base updated');
       } catch (err) {
-        setError(err?.response?.data?.detail || err.message || 'Upload failed');
+        const errorMsg = err?.response?.data?.detail || err.message || 'Upload failed';
+        setError(errorMsg);
         setStatus('error');
+        toast.error('Upload failed');
       }
     },
-    [onUpload]
+    [onUpload, toast]
   );
 
   const onDrop = (e) => {
@@ -124,7 +132,7 @@ export default function FileUploader({ onUpload }) {
             />
           </div>
           <p className="upload-progress-label">
-            {progress < 100 ? `Uploading… ${progress}%` : 'Processing & indexing…'}
+            {progress < 100 ? 'Uploading PDF...' : 'Processing PDF...'}
           </p>
         </div>
       )}

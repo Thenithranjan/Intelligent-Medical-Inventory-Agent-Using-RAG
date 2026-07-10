@@ -29,34 +29,43 @@ async def upload_pdf(file: UploadFile = File(...)):
         )
 
     # -----------------------------
-    # Read uploaded file
+    # Read and save uploaded file
     # -----------------------------
-    contents = await file.read()
+    try:
+        contents = await file.read()
 
-    if len(contents) == 0:
+        if len(contents) == 0:
+            raise HTTPException(
+                status_code=400,
+                detail="Uploaded file is empty."
+            )
+
+        if len(contents) > MAX_FILE_SIZE_BYTES:
+            raise HTTPException(
+                status_code=400,
+                detail="File exceeds the 10 MB size limit."
+            )
+
+        # -----------------------------
+        # Create uploads folder
+        # -----------------------------
+        UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+        # -----------------------------
+        # Save uploaded PDF
+        # -----------------------------
+        safe_name = Path(file.filename).name
+        saved_path = UPLOAD_DIR / safe_name
+
+        saved_path.write_bytes(contents)
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(e)
         raise HTTPException(
-            status_code=400,
-            detail="Uploaded file is empty."
+            status_code=500,
+            detail="Unable to upload PDF."
         )
-
-    if len(contents) > MAX_FILE_SIZE_BYTES:
-        raise HTTPException(
-            status_code=400,
-            detail="File exceeds the 10 MB size limit."
-        )
-
-    # -----------------------------
-    # Create uploads folder
-    # -----------------------------
-    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-
-    # -----------------------------
-    # Save uploaded PDF
-    # -----------------------------
-    safe_name = Path(file.filename).name
-    saved_path = UPLOAD_DIR / safe_name
-
-    saved_path.write_bytes(contents)
 
     # -----------------------------
     # Create unique FAISS index
@@ -72,15 +81,12 @@ async def upload_pdf(file: UploadFile = File(...)):
             index_name=index_name,
             source_filename=safe_name,
         )
-
-    
-
     except Exception as e:
         print(e)
         raise HTTPException(
             status_code=500,
-            detail=f"PDF uploaded but ingestion failed: {str(e)}"
-    )
+            detail="Unable to ingest PDF."
+        )
     # -----------------------------
     # Success response
     # -----------------------------

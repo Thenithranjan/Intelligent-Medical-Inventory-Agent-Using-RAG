@@ -8,7 +8,7 @@ import './ChatBubble.css';
  * @param {boolean} isTyping — shows typing animation
  * @param {Array} sources — RAG source chunks
  */
-export default function ChatBubble({ role, text, isTyping, sources }) {
+export default function ChatBubble({ role, text, isTyping, sources, typingText }) {
   const isAgent = role === 'agent';
 
   return (
@@ -19,10 +19,17 @@ export default function ChatBubble({ role, text, isTyping, sources }) {
 
       <div className={`chat-bubble ${isAgent ? 'bubble-agent' : 'bubble-user'}`}>
         {isTyping ? (
-          <div className="typing-indicator">
-            <span className="typing-dot" />
-            <span className="typing-dot" />
-            <span className="typing-dot" />
+          <div className="typing-indicator-container" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div className="typing-indicator">
+              <span className="typing-dot" />
+              <span className="typing-dot" />
+              <span className="typing-dot" />
+            </div>
+            {typingText && (
+              <span className="typing-status-label" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', animation: 'pulse 1.5s infinite' }}>
+                {typingText}
+              </span>
+            )}
           </div>
         ) : (
           <>

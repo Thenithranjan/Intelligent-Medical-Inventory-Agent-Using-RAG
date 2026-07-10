@@ -50,7 +50,7 @@ def ingest_pdf(
 def query(
     question: str,
     index_name: str = "default",
-    top_k: int = 3,
+    top_k: int = 5,
 ) -> dict[str, str | list[dict]]:
     """Query pipeline: question → FAISS retrieval → Groq answer."""
     return answer_with_rag(question, index_name=index_name, top_k=top_k)
