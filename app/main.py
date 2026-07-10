@@ -16,8 +16,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173"
-        # REPLACE_WITH_NETLIFY_URL: Add your Netlify frontend URL here (e.g. "https://your-app.netlify.app")
+        "http://localhost:5173",
+        "https://intelligent-medical-inventory-agent.vercel.app/"
     ],
     allow_credentials=True,
     allow_methods=["*"],
