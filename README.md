@@ -25,11 +25,11 @@ Users upload medical inventory PDFs, which are converted into embeddings and sto
 
 ### 🌐 Frontend
 
-> https://YOUR-VERCEL-URL.vercel.app
+> https://intelligent-medical-inventory-agent.vercel.app
 
 ### ⚙️ Backend API
 
-> https://YOUR-RAILWAY-URL.up.railway.app/docs
+> https://intelligent-medical-inventory-agent-using-rag-production.up.railway.app/docs
 
 ---
 
