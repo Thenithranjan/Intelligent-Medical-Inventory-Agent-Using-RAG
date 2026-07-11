@@ -9,6 +9,9 @@
 }
 
 .upload-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
   animation: fadeInUp 0.4s var(--ease-smooth) both;
 }
 
@@ -91,9 +94,109 @@
   flex-shrink: 0;
 }
 
+/* ============================================================
+   Demo PDF Library Section
+   ============================================================ */
+.demo-section,
+.upload-own-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.demo-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.demo-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.demo-section-icon {
+  color: var(--primary-500);
+}
+
+.demo-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.demo-section-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* --- Demo card grid --- */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: var(--space-5);
+}
+
+/* Skeleton placeholder */
+.demo-card-skeleton {
+  height: 178px;
+  border-radius: var(--radius-lg);
+}
+
+/* Error / empty message */
+.demo-fetch-error {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: var(--space-4);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+/* ============================================================
+   OR Divider
+   ============================================================ */
+.upload-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.upload-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-strong),
+    transparent
+  );
+}
+
+.upload-divider-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  white-space: nowrap;
+}
+
 /* --- Responsive --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .upload-page-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .demo-grid {
     grid-template-columns: 1fr;
   }
 }

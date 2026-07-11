@@ -1,6 +1,8 @@
 from pathlib import Path
+from typing import List
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
+from pydantic import BaseModel
 
 from app.pipeline.rag_pipeline import ingest_pdf
 
@@ -9,6 +11,38 @@ router = APIRouter(prefix="/pdf", tags=["pdf"])
 UPLOAD_DIR = Path(__file__).resolve().parent.parent.parent / "uploads"
 
 MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
+
+# ---------------------------------------------------------------------------
+# Known descriptions for demo PDFs — add more as you drop files in uploads/
+# ---------------------------------------------------------------------------
+DEMO_DESCRIPTIONS: dict[str, str] = {
+    "Medicine Manual.pdf": "Medicine inventory handbook covering drug storage, dosages, and administration guidelines.",
+    "standard-treatment-guidelines.pdf": "Comprehensive medical treatment reference for standard clinical procedures.",
+}
+
+
+class DemoPDF(BaseModel):
+    filename: str
+    description: str
+    size_bytes: int
+
+
+@router.get("/demo", response_model=List[DemoPDF])
+async def list_demo_pdfs():
+    """Return all PDF files available in the uploads folder."""
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    pdfs = []
+    for path in sorted(UPLOAD_DIR.glob("*.pdf")):
+        pdfs.append(
+            DemoPDF(
+                filename=path.name,
+                description=DEMO_DESCRIPTIONS.get(
+                    path.name, "Medical reference document ready to query."
+                ),
+                size_bytes=path.stat().st_size,
+            )
+        )
+    return pdfs
 
 
 @router.post("/upload")

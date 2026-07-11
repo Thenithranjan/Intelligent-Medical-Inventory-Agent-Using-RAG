@@ -1,0 +1,190 @@
+/* ============================================================
+   DemoPDFCard Component
+   ============================================================ */
+
+.demo-pdf-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth);
+  animation: fadeInUp 0.4s var(--ease-smooth) both;
+}
+
+.demo-pdf-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Success state border glow */
+.demo-pdf-card.success {
+  border-color: var(--success-500);
+  box-shadow: 0 0 0 1px var(--success-500), var(--shadow-md);
+}
+
+/* Error state border */
+.demo-pdf-card.error {
+  border-color: var(--danger-400);
+}
+
+/* --- Top accent gradient bar --- */
+.demo-card-accent {
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-500), var(--accent-400));
+  flex-shrink: 0;
+}
+
+/* --- Card body (icon + text) --- */
+.demo-card-body {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-5) var(--space-5) var(--space-3);
+}
+
+/* Icon wrapper */
+.demo-card-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--primary-100), var(--accent-100));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .demo-card-icon-wrap {
+  background: linear-gradient(135deg, rgba(108, 92, 231, 0.25), rgba(0, 206, 201, 0.15));
+}
+
+.demo-card-icon {
+  color: var(--primary-500);
+}
+
+/* Text meta */
+.demo-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-card-filename {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: var(--space-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: var(--space-2);
+}
+
+.demo-card-size {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* --- Card footer (action) --- */
+.demo-card-footer {
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  border-top: 1px solid var(--border-light);
+  margin-top: var(--space-2);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+}
+
+.demo-use-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* --- Loading row --- */
+.demo-loading-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--primary-500);
+  font-size: 0.82rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.demo-spinner {
+  animation: spin 0.9s linear infinite;
+  flex-shrink: 0;
+}
+
+.demo-loading-label {
+  animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+/* --- Result rows (success / error) --- */
+.demo-result-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.demo-result-success {
+  color: var(--success-600);
+}
+
+.demo-result-error {
+  color: var(--danger-500);
+}
+
+/* Ask questions link */
+.demo-ask-link {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.demo-ask-link:hover {
+  color: var(--primary-400);
+  text-decoration: underline;
+}
+
+/* Retry button */
+.demo-retry-btn {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--danger-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.demo-retry-btn:hover {
+  opacity: 0.75;
+}
+
+/* --- Skeleton loader for cards while fetching list --- */
+.demo-card-skeleton {
+  height: 178px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}

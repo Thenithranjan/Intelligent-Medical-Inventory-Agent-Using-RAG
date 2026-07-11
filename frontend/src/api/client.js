@@ -30,4 +30,14 @@ export const ingestPDF = (pdfPath, indexName = 'medical_inventory') =>
 export const askAgent = (question, indexName = 'medical_inventory', topK = 3) =>
   api.post('/rag/ask', { question, index_name: indexName, top_k: topK });
 
+/** List all demo PDFs available in the backend uploads folder */
+export const getDemoPDFs = () => api.get('/pdf/demo');
+
+/**
+ * Ingest a demo PDF that already exists in the backend uploads/ folder.
+ * Passes just the filename — the backend resolves the full path itself.
+ */
+export const useDemoPDF = (filename, indexName = 'medical_inventory') =>
+  ingestPDF(filename, indexName);
+
 export default api;
