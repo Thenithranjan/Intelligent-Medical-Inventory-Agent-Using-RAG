@@ -28,7 +28,9 @@ share/python-wheels/
 *.egg
 
 # Specific directories
-uploads/
+uploads/*
+!uploads/Medicine Manual.pdf
+!uploads/standard-treatment-guidelines.pdf
 vectorstore/
 
 # OS generated files
