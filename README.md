@@ -259,31 +259,36 @@ npm run dev
 
 ## Home Page
 
-(Add Screenshot)
+<img width="1534" height="692" alt="image" src="https://github.com/user-attachments/assets/b24fb0c1-97d6-432b-85d9-fbd5c2a6b2f4" />
+
 
 ---
 
 ## Upload PDF
 
-(Add Screenshot)
+<img width="1536" height="696" alt="image" src="https://github.com/user-attachments/assets/2210962d-2d75-40ac-9fe2-376638e9ddbc" />
+
 
 ---
 
 ## AI Response
 
-(Add Screenshot)
+<img width="1536" height="692" alt="image" src="https://github.com/user-attachments/assets/02a33171-2a8d-4230-9b58-a63abe619658" />
+
 
 ---
 
 ## Swagger API
 
-(Add Screenshot)
+<img width="1390" height="696" alt="image" src="https://github.com/user-attachments/assets/2c0e19ab-23d9-4d34-8028-a8f1a95d9d78" />
+
 
 ---
 
-## Railway Deployment
+## Knowledge Base
 
-(Add Screenshot)
+<img width="1536" height="695" alt="image" src="https://github.com/user-attachments/assets/8fc85439-a4c8-40ef-b266-75511e281574" />
+
 
 ---
 
